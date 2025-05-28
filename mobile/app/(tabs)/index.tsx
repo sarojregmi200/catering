@@ -1,9 +1,16 @@
+import { useThemeColor } from "@/hooks/useThemeColor";
 import { Text, View } from "react-native";
 
 export const Index = () => {
   return (
     <View>
-      <Text>Hello</Text>
+      <Text
+        style={{
+          color: useThemeColor("text"),
+        }}
+      >
+        Hello
+      </Text>
     </View>
   );
 };
