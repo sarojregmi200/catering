@@ -3,8 +3,12 @@ import { AntDesign } from "@expo/vector-icons";
 import "react-native-reanimated";
 
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { View } from "react-native";
+
 export default function RootLayout() {
+  const backgroundColor = useThemeColor("background");
+  const bgSecondary = useThemeColor("bgSecondary");
+  const borderColor = useThemeColor("border");
+
   return (
     <Tabs
       screenOptions={{
@@ -12,13 +16,13 @@ export default function RootLayout() {
         headerShown: false,
         tabBarShowLabel: false,
         sceneStyle: {
-          backgroundColor: useThemeColor("background"),
+          backgroundColor: backgroundColor,
           // there must be a better way to offset exact statusbar.
           paddingTop: 40,
-          paddingLeft: 10,
+          paddingHorizontal: 15,
         },
         tabBarStyle: {
-          backgroundColor: useThemeColor("bgSecondary"),
+          backgroundColor: bgSecondary,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -29,7 +33,7 @@ export default function RootLayout() {
           overflow: "visible",
           borderWidth: 1,
           borderTopWidth: 1,
-          borderColor: useThemeColor("border"),
+          borderColor: borderColor,
         },
         tabBarItemStyle: {
           borderRadius: 10,
