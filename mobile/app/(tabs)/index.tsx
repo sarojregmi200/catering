@@ -147,8 +147,9 @@ export const Index = () => {
         staff: Math.ceil(details.participants / 10),
         date: new Date().toISOString().split("T")[0],
       };
-      setEvents([...events, newEvent]);
-      Alert.alert("Event Created", `${newEvent.eventTitle} has been created.`);
+      console.log("got here ");
+      {/* setEvents([...events, newEvent]);
+      Alert.alert("Event Created", `${newEvent.eventTitle} has been created.`); */}
     }
   };
 
@@ -182,6 +183,7 @@ export const Index = () => {
   return (
     <View style={styles.container}>
       <SearchBox />
+
       <SectionList
         sections={sections}
         keyExtractor={(item) => item.eventTitle}

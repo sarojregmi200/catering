@@ -7,20 +7,30 @@ import Animated, {
   runOnJS,
   withSpring,
 } from "react-native-reanimated";
-import { Card, CardProps } from "./Card";
+import { Card, TCardProps } from "./Card";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { Ionicons } from "@expo/vector-icons";
 import { ActionPopup } from "./ActionPopup";
+
 import * as Haptics from "expo-haptics";
+import { atom, createStore } from "jotai";
 
 const SWIPE_THRESHOLD = 60;
 const ACTION_ACTIVATION_THRESHOLD = 50;
 
-type SwipeableCardProps = CardProps & {
+type SwipeableCardProps = TCardProps & {
   onDelete: () => void;
   onCreate: (details: { eventName?: string; participants?: number }) => void;
   onSwipeStart: () => void;
   onSwipeEnd: () => void;
+};
+
+const drawerState = atom(false);
+const jotaiStore = createStore();
+
+const handleCreateAction = () => {
+  jotaiStore.set(drawerState, true);
+  console.log(jotaiStore.get(drawerState));
 };
 
 export const SwipeableCard = ({
@@ -62,12 +72,6 @@ export const SwipeableCard = ({
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: translateX.value }],
   }));
-
-  const handleCreateAction = () => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    setActionType("create");
-    setPopupVisible(true);
-  };
 
   const handleDeleteAction = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
