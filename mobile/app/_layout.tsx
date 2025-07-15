@@ -1,10 +1,10 @@
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { Slot } from "expo-router";
 import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { Provider } from 'jotai';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Provider } from "jotai";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function Layout() {
   const isDarkMode = useColorScheme() === "dark";
@@ -39,14 +39,7 @@ export default function Layout() {
             fonts: DefaultTheme.fonts,
           }}
         >
-          <Stack>
-            <Stack.Screen
-              name="(tabs)"
-              options={{
-                headerShown: false,
-              }}
-            />
-          </Stack>
+          <Slot />
         </ThemeProvider>
       </Provider>
     </GestureHandlerRootView>
