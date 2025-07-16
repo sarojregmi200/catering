@@ -13,29 +13,19 @@ import { Ionicons } from "@expo/vector-icons";
 import { ActionPopup } from "./ActionPopup";
 
 import * as Haptics from "expo-haptics";
-import { atom, createStore } from "jotai";
 
 const SWIPE_THRESHOLD = 60;
 const ACTION_ACTIVATION_THRESHOLD = 50;
 
 type SwipeableCardProps = TCardProps & {
-  onDelete: () => void;
-  onCreate: (details: { eventName?: string; participants?: number }) => void;
   onSwipeStart: () => void;
   onSwipeEnd: () => void;
 };
 
-const drawerState = atom(false);
-const jotaiStore = createStore();
-
-const handleCreateAction = () => {
-  jotaiStore.set(drawerState, true);
-  console.log(jotaiStore.get(drawerState));
-};
+const handleExtendEvent = () => {};
+const handleDeleteEvent = () => {};
 
 export const SwipeableCard = ({
-  onDelete,
-  onCreate,
   onSwipeStart,
   onSwipeEnd,
   ...props
@@ -57,9 +47,9 @@ export const SwipeableCard = ({
     })
     .onEnd(() => {
       if (translateX.value > ACTION_ACTIVATION_THRESHOLD) {
-        runOnJS(handleCreateAction)();
+        runOnJS(handleExtendEvent)();
       } else if (translateX.value < -ACTION_ACTIVATION_THRESHOLD) {
-        runOnJS(handleDeleteAction)();
+        runOnJS(handleDeleteEvent)();
       } else {
         translateX.value = withSpring(0);
       }
